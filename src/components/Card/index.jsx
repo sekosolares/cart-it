@@ -21,10 +21,13 @@ export function Card({ category, image, name, price }) {
           alt={name}
         />
         <div
-          className='absolute top-0 right-0 flex justify-center items-center bg-black/10 w-6 h-6 rounded-full m-2 p-1'
-          onClick={() => setCartCounter(prevCount => prevCount + 1)}
+          className='absolute top-0 right-0 flex justify-center items-center bg-gray-400 w-6 h-6 rounded-full m-2 p-1 z-10'
+          onClick={(ev) => {
+            ev.stopPropagation();
+            setCartCounter(prevCount => prevCount + 1)
+          }}
         >
-          <PlusIcon className='text-gray-950' />
+          <PlusIcon className='text-gray-950 z-10' />
         </div>
       </figure>
       <p className='flex justify-between w-full'>
