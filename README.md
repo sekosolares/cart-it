@@ -1,3 +1,4 @@
+[![Netlify Status](https://api.netlify.com/api/v1/badges/dcc2257a-bbb0-463d-a97b-76b9b86c50f1/deploy-status)](https://app.netlify.com/sites/lucent-eclair-e3643a/deploys)
 # Cart!t
 
 Simple E-Commerce project developed using React+Vite.
