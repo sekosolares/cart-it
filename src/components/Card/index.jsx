@@ -4,10 +4,13 @@ import { PlusIcon } from '@heroicons/react/24/solid';
 
 // eslint-disable-next-line react/prop-types
 export function Card({ category, image, name, price }) {
-  const { setCartCounter } = useContext(ProductsContext);
+  const { setCartCounter, openDetail } = useContext(ProductsContext);
 
   return (
-    <div className='flex flex-col items-stretch justify-evenly bg-gray-600/10 cursor-pointer w-56 rounded-lg p-3'>
+    <div
+      className='flex flex-col items-stretch justify-evenly bg-gray-600/10 cursor-pointer w-56 rounded-lg p-3'
+      onClick={openDetail}
+    >
       <figure className='relative mb-2 w-full h-4/5'>
         <figcaption
           className='absolute bottom-0 left-0 bg-white/60 rounded-lg text-black text-xs m-2 px-3 py-0.5 pl-2'
