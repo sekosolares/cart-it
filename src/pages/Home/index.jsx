@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
 import { Card } from '../../components/Card';
-import { ProductDetail } from '../../components/ProductDetail';
 
 const STORE_API = "https://fakestoreapi.com/products";
 
@@ -24,10 +23,10 @@ export function Home() {
             price={product.price}
             image={product.images ? product.images[0] : product.image}
             category={product.category.name ?? product.category}
+            description={product.description}
           />
         ))}
       </div>
-      <ProductDetail/>
     </>
   )
 }

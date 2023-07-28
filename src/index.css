@@ -9,7 +9,17 @@
   box-shadow: inset 0 0 2rem rgba(121, 206, 255, 0.548);
 }
 .cute-scroll::-webkit-scrollbar-thumb {
-  /* background-color: rgba(41, 116, 170, 0.884); */
+  background-color: rgba(63, 63, 63, 0.884);
+  outline: rgba(6, 29, 46, 0.884);
+}
+
+.cute-scroll-bold::-webkit-scrollbar {
+  width: .5rem;
+}
+.cute-scroll-bold::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 4rem rgba(102, 136, 156, 0.548);
+}
+.cute-scroll-bold::-webkit-scrollbar-thumb {
   background-color: rgba(63, 63, 63, 0.884);
   outline: rgba(6, 29, 46, 0.884);
 }
