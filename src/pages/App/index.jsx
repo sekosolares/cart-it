@@ -6,6 +6,8 @@ import { MyOrder } from '../MyOrder';
 import { MyOrders } from '../MyOrders';
 import { NotFound } from '../NotFound';
 import { SignIn } from '../SignIn';
+import { ProductDetail } from '../../components/ProductDetail';
+import { CheckoutSideMenu } from '../../components/CheckoutSideMenu';
 
 import './App.css';
 import { CustomRoutes } from '../../../routes';
@@ -37,6 +39,9 @@ export function App() {
           <AppRoutes/>
         </Layout>
       </BrowserRouter>
+
+      <ProductDetail/>
+      <CheckoutSideMenu/>
     </ProductsProvider>
   )
 }
