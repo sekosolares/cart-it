@@ -1,10 +1,11 @@
-import { useContext } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { ProductsContext } from '../../contexts/productContext'
-import { PlusIcon } from '@heroicons/react/24/solid';
+import { PlusIcon, MinusIcon } from '@heroicons/react/24/solid';
 
 // eslint-disable-next-line react/prop-types
 export function Card(productData) {
-  const { setCartCounter, openDetail, closeCheckout, setProductDetailData, setCartProducts } = useContext(ProductsContext);
+  const { setCartCounter, openDetail, closeCheckout, setProductDetailData, setCartProducts, cartProducts } = useContext(ProductsContext);
+  const [isProductAdded, setIsProductAdded] = useState(false);
 
   const showProductDetails = () => {
     closeCheckout();
@@ -14,9 +15,20 @@ export function Card(productData) {
 
   const addProductsToCart = ev => {
     ev.stopPropagation();
-    setCartCounter(prevCount => prevCount + 1);
     setCartProducts(prevCartData => [...prevCartData, productData]);
   }
+
+  const removeProductFromCart = ev => {
+    ev.stopPropagation();
+    const newCartData = cartProducts.filter(prod => prod.id !== productData.id);
+    setCartProducts(newCartData);
+  }
+
+  useEffect(() => {
+    const productInCart = cartProducts.some(product => product.id === productData.id);
+    setIsProductAdded(productInCart);
+    setCartCounter(cartProducts.length);
+  }, [cartProducts]);
 
   return (
     <div
@@ -32,20 +44,34 @@ export function Card(productData) {
           src={productData.image}
           alt={productData.name}
         />
-        <div
-          className='absolute top-0 right-0 flex justify-center items-center bg-gray-400 w-6 h-6 rounded-full m-2 p-1 z-10'
-          onClick={(ev) => {
-            addProductsToCart(ev);
-          }}
-        >
-          <PlusIcon className='text-gray-950 z-10' />
-        </div>
+        {
+          !isProductAdded
+          ? (
+            <div
+              className='absolute top-0 right-0 flex justify-center items-center bg-gray-400 w-6 h-6 rounded-full m-2 p-1 z-10'
+              onClick={(ev) => {
+                addProductsToCart(ev);
+              }}
+            >
+              <PlusIcon className='text-gray-950 z-10' />
+            </div>
+          )
+          : (
+            <div
+              className='absolute top-0 right-0 flex justify-center items-center bg-red-200 w-6 h-6 rounded-full m-2 p-1 z-10'
+              onClick={(ev) => {
+                removeProductFromCart(ev);
+              }}
+            >
+              <MinusIcon className='text-gray-950 z-10' />
+            </div>
+          )
+        }
       </figure>
       <p className='flex justify-between w-full'>
         <span className='text-sm font-medium'>{productData.name}</span>
         <span className='text-sm font-semibold'>$ {productData.price}</span>
       </p>
-      {/* <p className='w-full max-h-36 break-words text-sm font-light my-2 overflow-y-auto cute-scroll'> {description} </p> */}
     </div>
   )
 }
