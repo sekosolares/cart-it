@@ -17,9 +17,11 @@ import { ProductsProvider } from '../../contexts/productContext';
 const AppRoutes = () => {
   const routes = useRoutes([
     { path: CustomRoutes.HOME, element: <Home/> },
+    { path: CustomRoutes.FILTER_CATEGORY, element: <Home /> },
     { path: CustomRoutes.MY_ACCOUNT, element: <MyAccount /> },
     { path: CustomRoutes.MY_ORDER, element: <MyOrder/> },
     { path: CustomRoutes.MY_ORDERS, element: <MyOrders/> },
+    { path: CustomRoutes.MY_ORDERS_LAST, element: <MyOrder/> },
     { path: CustomRoutes.SIGN_IN, element: <SignIn/> },
     { path: '*', element: <NotFound/> }
   ]);

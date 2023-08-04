@@ -1,12 +1,28 @@
 import { NavLink } from 'react-router-dom';
 import { CustomRoutes } from '../../../routes';
-import { useContext } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { ProductsContext } from '../../contexts/productContext';
 import { ShoppingCartIcon } from '@heroicons/react/24/solid';
 
+const CATEGORIES = "https://fakestoreapi.com/products/categories";
+
 export function Navbar() {
   const isActiveStyle = 'underline underline-offset-8';
-  const { cartCounter } = useContext(ProductsContext);
+  const { cartCounter, openCheckout, closeDetail } = useContext(ProductsContext);
+  const [categories, setCategories] = useState([]);
+
+  const openCartInfo = () => {
+    closeDetail();
+    openCheckout();
+  }
+
+  useEffect(() => {
+    fetch(CATEGORIES)
+    .then(categories => categories.json())
+    .then(data => setCategories(data))
+    .catch(err => console.error(JSON.stringify(err, null, 2)));
+  }, []);
+
 
   return (
     <nav className='bg-white flex justify-between items-center fixed z-10 w-full py-5 px-8 text-sm font-normal top-0'>
@@ -26,46 +42,18 @@ export function Navbar() {
             All
           </NavLink>
         </li>
-        <li>
-          <NavLink
-            to='/clothes'
-            className={({ isActive }) => isActive ? isActiveStyle : undefined}
-          >
-            Clothes
-          </NavLink>
-        </li>
-        <li>
-          <NavLink
-            to='/electronics'
-            className={({ isActive }) => isActive ? isActiveStyle : undefined}
-          >
-            Electronics
-          </NavLink>
-        </li>
-        <li>
-          <NavLink
-            to='/forniture'
-            className={({ isActive }) => isActive ? isActiveStyle : undefined}
-          >
-            Forniture
-          </NavLink>
-        </li>
-        <li>
-          <NavLink
-            to='/toys'
-            className={({ isActive }) => isActive ? isActiveStyle : undefined}
-          >
-            Toys
-          </NavLink>
-        </li>
-        <li>
-          <NavLink
-            to='/others'
-            className={({ isActive }) => isActive ? isActiveStyle : undefined}
-          >
-            Others
-          </NavLink>
-        </li>
+        {
+          categories.map(category =>
+            <li
+              key={category}>
+              <NavLink
+                to={`/${category.replace(/'/g, '_').replace(/ /g, '-')}`}
+                className={({ isActive }) => isActive ? isActiveStyle : undefined}
+              >
+                {category}
+              </NavLink>
+            </li>)
+        }
       </ul>
 
       <ul className='flex justify-center items-center gap-4'>
@@ -96,7 +84,10 @@ export function Navbar() {
             Sign In
           </NavLink>
         </li>
-        <li className='flex items-center justify-between border border-blue-200 py-2 px-4 rounded-lg'>
+        <li
+          className='flex items-center justify-between border border-blue-200 py-2 px-4 rounded-lg cursor-pointer'
+          onClick={openCartInfo}
+        >
           <ShoppingCartIcon className='w-5 h-5 text-gray-700' />
           <div>
           {cartCounter}
