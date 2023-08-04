@@ -2,9 +2,19 @@ import { XMarkIcon } from '@heroicons/react/24/solid';
 import { useContext, useEffect } from 'react';
 import { ProductsContext } from '../../contexts/productContext';
 import { OrderCard } from '../OrderCard';
+import { useNavigate } from 'react-router-dom';
+import { getToday } from '../../utils/dates'
 
 export function CheckoutSideMenu() {
-  const { isCheckoutOpen, closeCheckout, cartProducts, setCartProducts } = useContext(ProductsContext);
+  const {
+    isCheckoutOpen,
+    closeCheckout,
+    cartProducts,
+    setCartCounter,
+    setCartProducts,
+    setMyOrder
+  } = useContext(ProductsContext);
+  const navigate = useNavigate();
 
   const removeProductFromCart = (producId) => {
     const newProdCart = cartProducts.filter(prod => prod.id !== producId);
@@ -19,11 +29,36 @@ export function CheckoutSideMenu() {
   const renderCartTotal = () => {
     const total = getCartTotal();
     return (
-      <div className='flex justify-between items-center'>
+      <div className='flex justify-between items-center mb-2'>
         <span className='font-light'>Total: </span>
         <span className='font-medium text-lg'>$ {total.toFixed(2)}</span>
       </div>
     )
+  }
+
+  const generateOrderId = () => {
+    const date = new Date();
+    const day = date.getDate().toString();
+    const month = date.getMonth();
+    const year = date.getFullYear();
+    const milisecond = date.getMilliseconds();
+    return `${day}${month}-${year}${milisecond}`;
+  }
+
+  const handleCheckout = () => {
+    const orderToAdd = {
+      id: generateOrderId(),
+      date: getToday(),
+      products: cartProducts,
+      totalProducts: cartProducts.length,
+      totalPrice: getCartTotal().toFixed(2)
+    };
+
+    setMyOrder(prevOrder => [...prevOrder, orderToAdd]);
+    setCartProducts([]);
+    setCartCounter(0);
+    closeCheckout();
+    navigate('/my-order/last');
   }
 
   useEffect(() => {
@@ -45,7 +80,7 @@ export function CheckoutSideMenu() {
           />
         </div>
       </div>
-      <div className='px-6 overflow-auto cute-scroll-bold'>
+      <div className='px-6 overflow-auto cute-scroll-bold flex-1'>
         {
           cartProducts?.map(cartProduct =>
             <OrderCard
@@ -61,6 +96,10 @@ export function CheckoutSideMenu() {
       </div>
       <div className='px-6'>
         {renderCartTotal()}
+        <button
+          onClick={handleCheckout}
+          className='bg-black py-3 w-full text-white rounded-lg'
+        >Checkout</button>
       </div>
     </aside>
   )

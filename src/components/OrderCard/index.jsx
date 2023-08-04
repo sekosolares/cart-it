@@ -13,10 +13,10 @@ export function OrderCard({ title, image, price, removeAction }) {
       </div>
       <div className='flex items-center gap-2'>
         <span className='text-lg font-medium'>{price}</span>
-        <TrashIcon
+        {removeAction && <TrashIcon
           onClick={removeAction}
           className='h-4 w-4 text-red-600 cursor-pointer'
-        />
+        />}
       </div>
     </div>
   )
