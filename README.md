@@ -19,7 +19,7 @@ nvm use
 ```bash
 npm run dev
 ```
-3. Make changes to whatever file! Happy coding!
+3. Make changes and enjoy the view! Happy coding!
 
 ### Resources for this project:
 - [Fake Store API](https://fakestoreapi.com/docs)
