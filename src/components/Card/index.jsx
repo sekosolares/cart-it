@@ -58,12 +58,12 @@ export function Card(productData) {
           )
           : (
             <div
-              className='absolute top-0 right-0 flex justify-center items-center bg-red-200 w-6 h-6 rounded-full m-2 p-1 z-10'
+              className='absolute top-0 right-0 flex justify-center items-center bg-red-700 w-6 h-6 rounded-full m-2 p-1 z-10'
               onClick={(ev) => {
                 removeProductFromCart(ev);
               }}
             >
-              <MinusIcon className='text-gray-950 z-10' />
+              <MinusIcon className='text-white' />
             </div>
           )
         }
