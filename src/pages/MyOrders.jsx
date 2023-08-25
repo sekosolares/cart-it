@@ -1,11 +1,9 @@
 import { useContext } from 'react';
 import { OrdersCard } from '../components/OrdersCard';
-// import { ProductsContext } from '../contexts/productContext';
 import { Link } from 'react-router-dom';
 import { UsersContext } from '../contexts/userContext';
 
 export function MyOrders() {
-  // const { myOrders } = useContext(ProductsContext);
   const { loggedUser } = useContext(UsersContext);
 
   return (

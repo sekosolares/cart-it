@@ -1,12 +1,10 @@
 import { useContext } from 'react';
-// import { ProductsContext } from '../contexts/productContext';
 import { OrderCard } from '../components/OrderCard';
 import { Link, useParams } from 'react-router-dom';
 import { ChevronLeftIcon } from '@heroicons/react/24/solid';
 import { UsersContext } from '../contexts/userContext';
 
 export function MyOrder() {
-  // const { myOrders } = useContext(ProductsContext);
   const { loggedUser } = useContext(UsersContext);
   const { id } = useParams();
 
