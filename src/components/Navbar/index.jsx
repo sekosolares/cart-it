@@ -3,12 +3,14 @@ import { CustomRoutes } from '../../../routes';
 import { useContext, useEffect, useState } from 'react';
 import { ProductsContext } from '../../contexts/productContext';
 import { ShoppingCartIcon } from '@heroicons/react/24/solid';
+import { UsersContext } from '../../contexts/userContext';
 
 const CATEGORIES = "https://fakestoreapi.com/products/categories";
 
 export function Navbar() {
   const isActiveStyle = 'underline underline-offset-8';
   const { cartCounter, openCheckout, closeDetail } = useContext(ProductsContext);
+  const { loggedUser } = useContext(UsersContext);
   const [categories, setCategories] = useState([]);
 
   const openCartInfo = () => {
@@ -25,7 +27,7 @@ export function Navbar() {
 
 
   return (
-    <nav className='bg-white flex justify-between items-center fixed z-10 w-full py-5 px-8 text-sm font-normal top-0'>
+    <nav className='bg-white flex justify-between items-center fixed z-20 w-full py-5 px-8 text-sm font-normal top-0'>
       <ul className='flex justify-center items-center gap-4'>
         <li className='font-semibold text-lg'>
           <NavLink
@@ -47,7 +49,7 @@ export function Navbar() {
             <li
               key={category}>
               <NavLink
-                to={`/${category.replace(/'/g, '_').replace(/ /g, '-')}`}
+                to={`category/${category.replace(/'/g, '_').replace(/ /g, '-')}`}
                 className={({ isActive }) => isActive ? isActiveStyle : undefined}
               >
                 {category}
@@ -58,7 +60,7 @@ export function Navbar() {
 
       <ul className='flex justify-center items-center gap-4'>
         <li className='text-black/60'>
-          buho@seko.dev
+          {loggedUser ? loggedUser.username : 'guest'}
         </li>
         <li>
           <NavLink
@@ -78,12 +80,23 @@ export function Navbar() {
         </li>
         <li>
           <NavLink
-            to={CustomRoutes.SIGN_IN}
+            to={loggedUser ? CustomRoutes.SIGN_OUT : CustomRoutes.SIGN_IN}
             className={({ isActive }) => isActive ? isActiveStyle : undefined}
           >
-            Sign In
+            {loggedUser ? 'Sign Out' : 'Sign In'}
           </NavLink>
         </li>
+        {
+          !loggedUser &&
+            <li>
+              <NavLink
+                to={CustomRoutes.REGISTER}
+                className={({ isActive }) => isActive ? `bg-purple-500 text-white py-2 px-4 rounded-sm border-2 border-black` : 'bg-purple-500 text-white py-2 px-4 rounded-sm'}
+              >
+                Sign Up
+              </NavLink>
+            </li>
+        }
         <li
           className='flex items-center justify-between border border-blue-200 py-2 px-4 rounded-lg cursor-pointer'
           onClick={openCartInfo}

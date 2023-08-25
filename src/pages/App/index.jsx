@@ -12,6 +12,9 @@ import { CustomRoutes } from '../../../routes';
 import { Navbar } from '../../components/Navbar';
 import { Layout } from '../../components/Layout';
 import { ProductsProvider } from '../../contexts/productContext';
+import { UsersProvider } from '../../contexts/userContext';
+import { SignOut } from '../../components/SignOut';
+import { Register } from '../../components/Register';
 
 
 const AppRoutes = () => {
@@ -23,6 +26,8 @@ const AppRoutes = () => {
     { path: CustomRoutes.MY_ORDERS, element: <MyOrders/> },
     { path: CustomRoutes.MY_ORDERS_LAST, element: <MyOrder/> },
     { path: CustomRoutes.SIGN_IN, element: <SignIn/> },
+    { path: CustomRoutes.SIGN_OUT, element: <SignOut/>},
+    { path: CustomRoutes.REGISTER, element: <Register/> },
     { path: '*', element: <NotFound/> }
   ]);
 
@@ -33,12 +38,14 @@ export function App() {
 
   return (
     <ProductsProvider>
-      <BrowserRouter>
-        <Navbar/>
-        <Layout>
-          <AppRoutes/>
-        </Layout>
-      </BrowserRouter>
+      <UsersProvider>
+        <BrowserRouter>
+          <Navbar/>
+            <Layout>
+              <AppRoutes/>
+            </Layout>
+        </BrowserRouter>
+      </UsersProvider>
     </ProductsProvider>
   )
 }
