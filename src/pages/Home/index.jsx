@@ -6,16 +6,16 @@ import { ProductsContext } from '../../contexts/productContext';
 import { useParams } from 'react-router-dom';
 
 export function Home() {
-  const { setFilterTitle, filterTitle, filteredProducts, setCategory, setFilteredProducts, products } = useContext(ProductsContext);
+  const { setFilterTitle, filterTitle, filteredProducts, setCategory } = useContext(ProductsContext);
 
   const { categ } = useParams();
 
   useEffect(() => {
-    if(categ) {
+    if (categ) {
       const processedCategory = categ.replace(/_/g, "'").replace(/-/g, ' ');
       setCategory(processedCategory);
     } else {
-      setFilteredProducts(products);
+      setCategory(undefined);
     }
   }, [categ]);
 
