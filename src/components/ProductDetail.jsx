@@ -1,6 +1,6 @@
 import { XMarkIcon } from '@heroicons/react/24/solid';
 import { useContext } from 'react';
-import { ProductsContext } from '../../contexts/productContext';
+import { ProductsContext } from '../contexts/productContext';
 
 export function ProductDetail() {
   const { isProductDetailOpen, closeDetail, productDetailData } = useContext(ProductsContext);

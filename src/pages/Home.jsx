@@ -1,8 +1,8 @@
-import { Card } from '../../components/Card';
-import { ProductDetail } from '../../components/ProductDetail';
-import { CheckoutSideMenu } from '../../components/CheckoutSideMenu';
+import { Card } from '../components/Card';
+import { ProductDetail } from '../components/ProductDetail';
+import { CheckoutSideMenu } from '../components/CheckoutSideMenu';
 import { useContext, useEffect } from 'react';
-import { ProductsContext } from '../../contexts/productContext';
+import { ProductsContext } from '../contexts/productContext';
 import { useParams } from 'react-router-dom';
 
 export function Home() {
@@ -12,7 +12,7 @@ export function Home() {
 
   useEffect(() => {
     if (categ) {
-      const processedCategory = categ.replace(/_/g, "'").replace(/-/g, ' ');
+      const processedCategory = categ;//.replace(/_/g, "'").replace(/-/g, ' ');
       setCategory(processedCategory);
     } else {
       setCategory(undefined);

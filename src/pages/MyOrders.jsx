@@ -1,10 +1,12 @@
 import { useContext } from 'react';
-import { OrdersCard } from '../../components/OrdersCard';
-import { ProductsContext } from '../../contexts/productContext';
+import { OrdersCard } from '../components/OrdersCard';
+// import { ProductsContext } from '../contexts/productContext';
 import { Link } from 'react-router-dom';
+import { UsersContext } from '../contexts/userContext';
 
 export function MyOrders() {
-  const { myOrder } = useContext(ProductsContext);
+  // const { myOrders } = useContext(ProductsContext);
+  const { loggedUser } = useContext(UsersContext);
 
   return (
     <>
@@ -12,7 +14,7 @@ export function MyOrders() {
         <h1 className='text-2xl'>My Orders</h1>
       </div>
       <div>
-        {myOrder?.map((order) => (
+        {loggedUser.orders?.map((order) => (
           <Link key={order.id} to={`/my-order/${order.id}`}>
             <OrdersCard
               totalPrice={order.totalPrice}
