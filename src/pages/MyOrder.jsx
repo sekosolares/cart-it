@@ -1,16 +1,16 @@
 import { useContext } from 'react';
-import { ProductsContext } from '../../contexts/productContext';
-import { OrderCard } from '../../components/OrderCard';
+import { OrderCard } from '../components/OrderCard';
 import { Link, useParams } from 'react-router-dom';
 import { ChevronLeftIcon } from '@heroicons/react/24/solid';
+import { UsersContext } from '../contexts/userContext';
 
 export function MyOrder() {
-  const { myOrder } = useContext(ProductsContext);
+  const { loggedUser } = useContext(UsersContext);
   const { id } = useParams();
 
   const renderCards = () => {
     if( id === 'last')
-      return myOrder?.slice(-1)[0]?.products?.map(cartProduct =>
+      return loggedUser.orders?.slice(-1)[0]?.products?.map(cartProduct =>
           <OrderCard
             key={cartProduct.name}
             id={cartProduct.id}
@@ -20,7 +20,7 @@ export function MyOrder() {
           />
         )
     else
-      return myOrder?.find(order => order.id === id)?.products?.map(product =>
+      return loggedUser.orders?.find(order => order.id === id)?.products?.map(product =>
         <OrderCard
           key={product.name}
           id={product.id}

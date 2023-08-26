@@ -1,21 +1,21 @@
-import { Card } from '../../components/Card';
-import { ProductDetail } from '../../components/ProductDetail';
-import { CheckoutSideMenu } from '../../components/CheckoutSideMenu';
+import { Card } from '../components/Card';
+import { ProductDetail } from '../components/ProductDetail';
+import { CheckoutSideMenu } from '../components/CheckoutSideMenu';
 import { useContext, useEffect } from 'react';
-import { ProductsContext } from '../../contexts/productContext';
+import { ProductsContext } from '../contexts/productContext';
 import { useParams } from 'react-router-dom';
 
 export function Home() {
-  const { setFilterTitle, filterTitle, filteredProducts, setCategory, setFilteredProducts, products } = useContext(ProductsContext);
+  const { setFilterTitle, filterTitle, filteredProducts, setCategory } = useContext(ProductsContext);
 
   const { categ } = useParams();
 
   useEffect(() => {
-    if(categ) {
-      const processedCategory = categ.replace(/_/g, "'").replace(/-/g, ' ');
+    if (categ) {
+      const processedCategory = categ;//.replace(/_/g, "'").replace(/-/g, ' ');
       setCategory(processedCategory);
     } else {
-      setFilteredProducts(products);
+      setCategory(undefined);
     }
   }, [categ]);
 

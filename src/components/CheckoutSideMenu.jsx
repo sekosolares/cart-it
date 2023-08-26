@@ -1,9 +1,10 @@
 import { XMarkIcon } from '@heroicons/react/24/solid';
 import { useContext, useEffect } from 'react';
-import { ProductsContext } from '../../contexts/productContext';
-import { OrderCard } from '../OrderCard';
+import { ProductsContext } from '../contexts/productContext';
+import { OrderCard } from './OrderCard';
 import { useNavigate } from 'react-router-dom';
-import { getToday } from '../../utils/dates'
+import { getToday } from '../utils/dates'
+import { UsersContext } from '../contexts/userContext';
 
 export function CheckoutSideMenu() {
   const {
@@ -11,9 +12,9 @@ export function CheckoutSideMenu() {
     closeCheckout,
     cartProducts,
     setCartCounter,
-    setCartProducts,
-    setMyOrder
+    setCartProducts
   } = useContext(ProductsContext);
+  const { addOrderToUser } = useContext(UsersContext);
   const navigate = useNavigate();
 
   const removeProductFromCart = (producId) => {
@@ -54,7 +55,7 @@ export function CheckoutSideMenu() {
       totalPrice: getCartTotal().toFixed(2)
     };
 
-    setMyOrder(prevOrder => [...prevOrder, orderToAdd]);
+    addOrderToUser(orderToAdd);
     setCartProducts([]);
     setCartCounter(0);
     closeCheckout();
