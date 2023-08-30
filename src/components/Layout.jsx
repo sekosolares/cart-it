@@ -6,7 +6,7 @@ import { ProductsContext } from '../contexts/productContext';
 
 export function Layout({ children }) {
   const { isProductDetailOpen, isCheckoutOpen } = useContext(ProductsContext);
-  const [navVisible, setNavVisible] = useState(false);
+  const [navVisible, setNavVisible] = useState(window.innerWidth < 1024);
 
   useEffect(() => {
     setNavVisible(false);

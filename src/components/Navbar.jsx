@@ -13,7 +13,7 @@ export function Navbar({ navVisible, setNavVisible }) {
   const isActiveStyle = 'underline underline-offset-8';
   const signInUpStyle = loggedUser ? 'bg-red-500' : '';
   const [categories, setCategories] = useState([]);
-  const [windowWidth, setWindowWidth] = useState(0);
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
   const openCartInfo = () => {
     closeDetail();
@@ -35,23 +35,22 @@ export function Navbar({ navVisible, setNavVisible }) {
     window.addEventListener('resize', handleResize);
   }, []);
 
-
   return (
     <>
       <button
-        className='fixed bottom-5 right-5 w-10 h-10 rounded-full border-2 border-purple-900 bg-purple-600 flex justify-center items-center z-20 lg:hidden'
+        className='fixed bottom-5 right-5 w-16 h-16 rounded-full border-2 border-purple-900 bg-purple-600 flex justify-center items-center z-20 lg:hidden'
         onClick={() => setNavVisible(!navVisible)}
       >
         {
           navVisible
-          ? <XMarkIcon className='text-red-300 h-6 w-6 font-bold' />
-          : <Bars3Icon className='text-white h-6 w-6 font-bold' />
+          ? <XMarkIcon className='text-red-300 h-10 w-10 font-bold' />
+          : <Bars3Icon className='text-white h-10 w-10 font-bold' />
         }
       </button>
-      <nav className={`bg-white ${navVisible || windowWidth >= 1024 ? 'flex' : 'hidden'} items-center fixed z-20 py-5 px-8 text-sm font-normal top-0 right-0 max-sm:w-2/4 max-lg:overflow-y-auto cute-scroll max-lg:max-h-[calc(100vh-60px)] max-lg:rounded-lg max-lg:flex-col max-lg:justify-start lg:w-full lg:justify-between`}>
+      <nav className={`bg-white ${navVisible || windowWidth >= 1024 ? 'flex' : 'hidden'} items-center fixed z-20 py-5 px-8 font-normal top-0 right-0 max-sm:w-2/4 max-lg:text-lg max-lg:overflow-y-auto cute-scroll max-lg:max-h-[calc(100vh-90px)] max-lg:min-h-[calc(100vh-90px)] max-lg:rounded-lg max-lg:flex-col max-lg:justify-start max-lg:shadow-md lg:w-full lg:justify-between lg:text-sm`}>
         <div className='flex flex-col justify-start items-center lg:flex-row'>
           <ul className='flex flex-col justify-start items-center gap-6 max-md:w-full lg:flex-row'>
-            <li className='font-semibold text-lg'>
+            <li className='font-semibold max-lg:text-2xl lg:text-lg'>
               <NavLink
                 to={CustomRoutes.HOME}
               >
