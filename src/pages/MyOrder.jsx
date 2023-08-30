@@ -40,7 +40,7 @@ export function MyOrder() {
         </Link>
         <h1 className='text-2xl'>My Order</h1>
       </div>
-      <div className='flex flex-col w-96'>
+      <div className='flex flex-col lg:w-96'>
         {renderCards()}
       </div>
     </>

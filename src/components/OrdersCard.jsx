@@ -1,7 +1,6 @@
 import { BuildingStorefrontIcon, CalendarIcon, ChevronRightIcon, CurrencyDollarIcon } from '@heroicons/react/24/solid';
 
 
-// eslint-disable-next-line react/prop-types
 export function OrdersCard({ date, totalPrice, totalProducts }) {
   const infoSpanStyle = 'flex justify-start items-center';
   const infoIconStyle = 'w-4 h-4 mr-2';

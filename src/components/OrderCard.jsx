@@ -1,6 +1,5 @@
 import { TrashIcon } from '@heroicons/react/24/solid';
 
-// eslint-disable-next-line react/prop-types
 export function OrderCard({ title, image, price, removeAction }) {
 
   return (

@@ -1,6 +1,4 @@
 import { Card } from '../components/Card';
-import { ProductDetail } from '../components/ProductDetail';
-import { CheckoutSideMenu } from '../components/CheckoutSideMenu';
 import { useContext, useEffect } from 'react';
 import { ProductsContext } from '../contexts/productContext';
 import { useParams } from 'react-router-dom';
@@ -12,7 +10,7 @@ export function Home() {
 
   useEffect(() => {
     if (categ) {
-      const processedCategory = categ;//.replace(/_/g, "'").replace(/-/g, ' ');
+      const processedCategory = categ;
       setCategory(processedCategory);
     } else {
       setCategory(undefined);
@@ -31,7 +29,9 @@ export function Home() {
         value={filterTitle}
         onChange={(ev) => setFilterTitle(ev.target.value)}
       />
-      <div className='grid grid-cols-4 gap-x-4 gap-y-4 px-4 w-full max-w-screen-lg'>
+      <div
+        className='grid grid-cols-1 justify-center gap-x-4 gap-y-4 px-4 w-full max-w-screen-lg sm:grid-cols-3 lg:grid-cols-4'
+      >
         {filteredProducts.length > 0
         ? filteredProducts.map(product => (
           <Card
@@ -48,9 +48,6 @@ export function Home() {
           {`Couldn't find results for ${filterTitle}...`}
         </div>}
       </div>
-
-      <ProductDetail />
-      <CheckoutSideMenu />
     </>
   )
 }

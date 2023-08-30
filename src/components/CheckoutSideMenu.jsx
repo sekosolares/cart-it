@@ -6,6 +6,16 @@ import { useNavigate } from 'react-router-dom';
 import { getToday } from '../utils/dates'
 import { UsersContext } from '../contexts/userContext';
 
+
+const generateOrderId = () => {
+  const date = new Date();
+  const day = date.getDate().toString();
+  const month = date.getMonth();
+  const year = date.getFullYear();
+  const milisecond = date.getMilliseconds();
+  return `${day}${month}-${year}${milisecond}`;
+}
+
 export function CheckoutSideMenu() {
   const {
     isCheckoutOpen,
@@ -37,15 +47,6 @@ export function CheckoutSideMenu() {
     )
   }
 
-  const generateOrderId = () => {
-    const date = new Date();
-    const day = date.getDate().toString();
-    const month = date.getMonth();
-    const year = date.getFullYear();
-    const milisecond = date.getMilliseconds();
-    return `${day}${month}-${year}${milisecond}`;
-  }
-
   const handleCheckout = () => {
     const orderToAdd = {
       id: generateOrderId(),
@@ -69,7 +70,7 @@ export function CheckoutSideMenu() {
   return (
     <aside
       className={
-        `${isCheckoutOpen ? 'flex' : 'hidden'} w-[400px] h-[calc(100vh-78px)] flex-col fixed right-0 bottom-0 border border-black rounded-lg bg-white z-20 p-4`
+        `${isCheckoutOpen ? 'flex' : 'hidden'} flex-col fixed border border-black rounded-lg bg-white z-20 p-4 max-lg:bottom-0 max-lg:right-0 max-lg:left-0 max-lg:h-screen lg:w-[400px] lg:h-[calc(100vh-78px)] lg:right-0 lg:bottom-0`
       }
     >
       <div className='flex justify-between items-center p-6'>
@@ -97,10 +98,13 @@ export function CheckoutSideMenu() {
       </div>
       <div className='px-6'>
         {renderCartTotal()}
-        <button
-          onClick={handleCheckout}
-          className='bg-black py-3 w-full text-white rounded-lg'
-        >Checkout</button>
+        {
+          cartProducts.length > 0 &&
+            <button
+              onClick={handleCheckout}
+              className='bg-purple-600 py-3 w-full text-white rounded-lg'
+            >Checkout</button>
+        }
       </div>
     </aside>
   )
