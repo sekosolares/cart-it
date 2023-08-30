@@ -63,7 +63,7 @@ export function Card(productData) {
 
   return (
     <div
-      className='flex flex-col items-stretch justify-evenly bg-gray-600/10 cursor-pointer w-56 rounded-lg p-3'
+      className='flex flex-col items-stretch justify-evenly bg-gray-600/10 cursor-pointer rounded-lg p-3 lg:w-56'
       onClick={() => showProductDetails()}
     >
       <figure className='relative mb-2 w-full h-4/5'>
