@@ -1,13 +1,15 @@
 import { useContext, useEffect } from 'react';
 import { CustomRoutes } from '../../routes';
 import { UsersContext } from '../contexts/userContext';
+import { useNavigate } from 'react-router-dom';
 
 export function SignOut() {
   const { logout } = useContext(UsersContext);
+  const navigate = useNavigate();
 
   useEffect(() => {
     logout();
-    window.location.pathname = CustomRoutes.SIGN_IN;
+    navigate(CustomRoutes.SIGN_IN);
   }, []);
 
   return (

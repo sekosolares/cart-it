@@ -70,7 +70,7 @@ export function CheckoutSideMenu() {
   return (
     <aside
       className={
-        `${isCheckoutOpen ? 'flex' : 'hidden'} flex-col fixed border border-black rounded-lg bg-white z-20 p-4 max-lg:bottom-0 max-lg:right-0 max-lg:left-0 max-lg:h-screen lg:w-[400px] lg:h-[calc(100vh-78px)] lg:right-0 lg:bottom-0`
+        `${isCheckoutOpen ? 'flex' : 'hidden'} flex-col fixed border border-black rounded-lg bg-white z-20 p-4 max-lg:bottom-0 max-lg:right-0 max-lg:left-0 max-lg:h-[calc(100vh-100px)] lg:w-[400px] lg:h-[calc(100vh-78px)] lg:right-0 lg:bottom-0`
       }
     >
       <div className='flex justify-between items-center p-6'>
