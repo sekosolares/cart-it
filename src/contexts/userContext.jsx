@@ -73,6 +73,12 @@ export function UsersProvider({ children }) {
     setUsersLocalStorage(newUsers);
   };
 
+  const updateUserData = (newUserData) => {
+    const updatedUser = {...loggedUser, ...newUserData};
+    const newUsers = [...users.filter(user => user.id !== loggedUser.id), updatedUser];
+    setUsersLocalStorage(newUsers);
+  }
+
   const addOrderToUser = (order) => {
     const newUser = {...loggedUser, orders: [...loggedUser.orders, order]};
     const newUsers = [...users.filter(user => user.id !== loggedUser.id), newUser];
@@ -88,7 +94,8 @@ export function UsersProvider({ children }) {
     logIn,
     register,
     addOrderToUser,
-    logout
+    logout,
+    updateUserData
   }
 
   return (
