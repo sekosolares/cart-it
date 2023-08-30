@@ -8,7 +8,7 @@ export function ProductDetail() {
   return (
     <aside
       className={
-        `${isProductDetailOpen ? 'flex' : 'hidden'} w-[360px] h-[calc(100vh-78px)] flex-col fixed right-0 bottom-0 border border-black rounded-lg bg-white z-20 overflow-auto cute-scroll-bold p-4`
+        `${isProductDetailOpen ? 'flex' : 'hidden'} flex-col fixed border border-black rounded-lg bg-white z-20 p-4 max-lg:bottom-0 max-lg:right-0 max-lg:left-0 max-lg:h-screen lg:w-[400px] lg:h-[calc(100vh-78px)] lg:right-0 lg:bottom-0`
       }
     >
       <div className='flex justify-between items-center p-6'>

@@ -31,7 +31,7 @@ export function Register() {
       <h2 className='font-bold text-3xl'>Register</h2>
       <form
         onSubmit={handleRegister}
-        className='grid grid-cols-2 gap-4 p-6 min-h-[250px] w-3/4'
+        className='gap-4 w-3/4 max-lg:flex max-lg:flex-col lg:grid lg:grid-cols-2 lg:min-h-[250px] lg:p-6'
       >
         <div className='flex flex-col'>
           <label htmlFor='Username'>Username*</label>
@@ -54,8 +54,8 @@ export function Register() {
           <input type='email' id='Email' name='email' placeholder='john.doe@example.com' value={newUser.email} onChange={(e) => setNewUser({...newUser, email: e.target.value})} className='p-2 rounded-lg bg-purple-200' required />
         </div>
 
-        <div className='col-span-2 flex justify-center items-center'>
-          <button className='w-1/4 bg-black text-white py-2 px-4 rounded-lg'>Register</button>
+        <div className='flex justify-center items-center lg:col-span-2'>
+          <button className='bg-purple-600 text-white py-2 px-4 rounded-lg max-lg:w-full lg:w-1/4'>Register</button>
         </div>
       </form>
     </div>

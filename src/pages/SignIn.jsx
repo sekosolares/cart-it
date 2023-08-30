@@ -20,11 +20,11 @@ export function SignIn() {
   };
 
   return (
-    <div className='w-full flex flex-col justify-center items-center'>
-      <h2 className='font-bold text-3xl'>Sign In</h2>
+    <div className='w-full flex flex-col justify-center items-stretch max-md:mt-8'>
+      <h2 className='font-bold text-3xl text-center'>Sign In</h2>
       <form
         onSubmit={handleSignIn}
-        className='flex flex-col justify-between items-center p-6 min-h-[300px] w-1/4'
+        className='flex flex-col self-center justify-between items-center min-h-[300px] w-3/4 md:w-2/4 lg:w-1/3 lg:p-6'
       >
         <div className='flex flex-col justify-around items-center gap-4 w-full'>
           <div className='flex flex-col items-start justify-stretch w-full'>
@@ -38,7 +38,7 @@ export function SignIn() {
           </div>
         </div>
         <div className='w-full'>
-          <button className='w-full bg-black text-white py-2 px-4 rounded-lg'>Sign In</button>
+          <button className='w-full bg-purple-600 text-white py-2 px-4 rounded-lg'>Sign In</button>
         </div>
       </form>
     </div>
