@@ -37,7 +37,7 @@ export function Card(productData) {
       return !isProductAdded
         ? (
           <div
-            className='absolute top-0 right-0 flex justify-center items-center bg-gray-400 w-6 h-6 rounded-full m-2 p-1 z-10'
+            className='absolute top-0 right-0 flex justify-center items-center bg-gray-400 rounded-full m-2 p-1 z-10 max-lg:w-8 max-lg:h-8 lg:w-6 lg:h-6'
             onClick={(ev) => {
               addProductsToCart(ev);
             }}
@@ -47,7 +47,7 @@ export function Card(productData) {
         )
         : (
           <div
-            className='absolute top-0 right-0 flex justify-center items-center bg-red-700 w-6 h-6 rounded-full m-2 p-1 z-10'
+            className='absolute top-0 right-0 flex justify-center items-center bg-red-700 rounded-full m-2 p-1 z-10 max-lg:w-8 max-lg:h-8 lg:w-6 lg:h-6'
             onClick={(ev) => {
               removeProductFromCart(ev);
             }}
@@ -56,8 +56,8 @@ export function Card(productData) {
           </div>
         )
     else
-      return <div className='absolute top-0 right-0 flex justify-center items-center text-xs bg-gray-400 w-auto h-6 rounded-full m-2 p-2 z-10'>
-        readonly
+      return <div className='absolute top-0 right-0 flex justify-center items-center bg-gray-400 w-auto h-6 rounded-full m-2 p-3 z-10 text-sm'>
+        sign in to add
       </div>
   }
 
@@ -68,7 +68,7 @@ export function Card(productData) {
     >
       <figure className='relative mb-2 w-full h-4/5'>
         <figcaption
-          className='absolute bottom-0 left-0 bg-white/60 rounded-lg text-black text-xs m-2 px-3 py-0.5 pl-2'
+          className='absolute bottom-0 left-0 bg-white/60 rounded-lg text-black m-2 px-3 py-0.5 pl-2 max-lg:text-sm lg:text-xs'
         >{productData.category}</figcaption>
         <img
           className='w-full h-full object-cover rounded-lg'
@@ -78,8 +78,8 @@ export function Card(productData) {
         {renderAddRemoveAction()}
       </figure>
       <p className='flex justify-between w-full'>
-        <span className='text-sm font-medium'>{productData.name ?? productData.title}</span>
-        <span className='text-sm font-semibold'>$ {productData.price}</span>
+        <span className='font-medium max-lg:text-lg lg:text-sm'>{productData.name ?? productData.title}</span>
+        <span className='font-semibold max-lg:text-lg lg:text-sm'>$ {productData.price}</span>
       </p>
     </div>
   )
