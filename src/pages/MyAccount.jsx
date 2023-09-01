@@ -15,13 +15,21 @@ export function MyAccount() {
 
   const handleUpdateUser = (formData) => {
     formData.preventDefault();
-    updateUserData(newUserData);
+    const { success, message} = updateUserData(newUserData);
+    if (!success)
+      return alert(message);
+
+    setIsEditionMode(false);
+  };
+
+  const handleCancel = (formData) => {
+    formData.preventDefault();
     setIsEditionMode(false);
   };
 
   return (
     <div className='w-full flex flex-col justify-center items-center'>
-      <h2 className='font-bold text-3xl'>Register</h2>
+      <h2 className='font-bold text-3xl'>My Account</h2>
       <form
         onSubmit={handleUpdateUser}
         className='gap-4 w-3/4 max-lg:flex max-lg:flex-col max-lg:text-lg lg:grid lg:grid-cols-2 lg:min-h-[250px] lg:p-6'
@@ -57,15 +65,17 @@ export function MyAccount() {
           </EditorMode>
         </div>
 
-        {
-          isEditionMode &&
+        <EditorMode isEditionMode={isEditionMode} fallbackValue={''}>
           <div className='flex justify-center items-center lg:col-span-2'>
             <button className='bg-purple-600 text-white py-2 px-4 rounded-lg max-lg:w-full lg:w-1/4'>Save Changes</button>
           </div>
-        }
+          <div className='flex justify-center items-center lg:col-span-2'>
+            <button className='bg-red-600 text-white py-2 px-4 rounded-lg max-lg:w-full lg:w-1/4' onClick={handleCancel}>Cancel</button>
+          </div>
+        </EditorMode>
       </form>
-      <div className='w-3/4 pt-5 max-lg:text-lg'>
-        {!isEditionMode && <button onClick={() => setIsEditionMode(true)} className='w-full py-2 px-6 bg-purple-600 text-base rounded-lg text-white'>Edit</button>}
+      <div className='pt-5 flex items-center justify-center max-lg:w-3/4 max-lg:text-lg lg:col-span-2 lg:w-full'>
+        {!isEditionMode && <button onClick={() => setIsEditionMode(true)} className='py-2 px-4 bg-purple-600 text-base rounded-lg text-white max-lg:w-full lg:w-1/4'>Edit</button>}
       </div>
     </div>
   )

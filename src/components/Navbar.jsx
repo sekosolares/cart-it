@@ -47,7 +47,7 @@ export function Navbar({ navVisible, setNavVisible }) {
           : <Bars3Icon className='text-white h-10 w-10 font-bold' />
         }
       </button>
-      <nav className={`bg-white ${navVisible || windowWidth >= 1024 ? 'flex' : 'hidden'} items-center fixed z-20 py-5 px-8 font-normal bottom-[100px] right-0 max-sm:w-2/4 max-lg:text-lg max-lg:overflow-y-auto cute-scroll max-lg:max-h-[calc(100vh-180px)] max-lg:min-h-[calc(100vh-180px)] max-lg:rounded-lg max-lg:flex-col max-lg:justify-start max-lg:shadow-md lg:w-full lg:justify-between lg:text-sm`}>
+      <nav className={`bg-white ${navVisible || windowWidth >= 1024 ? 'flex' : 'hidden'} items-center fixed z-20 py-5 px-8 font-normal max-sm:w-2/4 max-lg:text-lg max-lg:right-0 max-lg:overflow-y-auto cute-scroll max-lg:bottom-[100px] max-lg:max-h-[calc(100vh-180px)] max-lg:min-h-[calc(100vh-180px)] max-lg:rounded-lg max-lg:flex-col max-lg:justify-start max-lg:shadow-md lg:top-0 lg:w-full lg:justify-between lg:text-sm`}>
         <div className='flex flex-col justify-start items-center lg:flex-row'>
           <ul className='flex flex-col justify-start items-center gap-6 max-md:w-full lg:flex-row'>
             <li className='font-semibold max-lg:text-2xl lg:text-lg'>

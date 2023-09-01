@@ -19,12 +19,12 @@ export function Home() {
 
   return (
     <>
-      <div className='flex items-center justify-center w-96 mb-4'>
+      <div className='flex items-center justify-center mb-4 max-lg:w-full lg:w-96'>
         <h1 className='font-bold text-2xl'>Awesome Products</h1>
       </div>
       <input
-        type='text'
-        className='rounded-lg border border-black p-2 mb-5 w-80 focus:outline-emerald-600'
+        type='search'
+        className='rounded-lg border border-black p-2 mb-5 focus:outline-emerald-600 max-lg:w-3/4 lg:w-80'
         placeholder='Search a product'
         value={filterTitle}
         onChange={(ev) => setFilterTitle(ev.target.value)}

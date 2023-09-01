@@ -42,7 +42,7 @@ export function Card(productData) {
               addProductsToCart(ev);
             }}
           >
-            <PlusIcon className='text-gray-950 z-10' />
+            <PlusIcon className='text-gray-950 z-[15]' />
           </div>
         )
         : (
@@ -52,7 +52,7 @@ export function Card(productData) {
               removeProductFromCart(ev);
             }}
           >
-            <MinusIcon className='text-white' />
+            <MinusIcon className='text-white z-[15]' />
           </div>
         )
     else
