@@ -26,10 +26,24 @@ export function UsersProvider({ children }) {
     setLoggedUser(loggedInUser);
   }, [users]);
 
+  const usernameExists = (userData) => {
+    const usersWithoutLoggedUser = users.filter(user => !user.isLoggedIn);
+    const usernameTaken = usersWithoutLoggedUser.some(user => user.username === userData.username);
+
+    return usernameTaken;
+  }
+
+  const emailExists = (userData) => {
+    const usersWithoutLoggedUser = users.filter(user => !user.isLoggedIn);
+    const emailTaken = usersWithoutLoggedUser.some(user => user.email === userData.email);
+
+    return emailTaken;
+  }
+
   const logIn = (username, password) => {
     const userToLogin = {...users.find(user => user.username === username)};
 
-    if (!userToLogin)
+    if (!userToLogin.username)
       return { success: false, message: 'Wrong username' };
 
     const isCorrectPassword = userToLogin.password === password;
@@ -51,12 +65,12 @@ export function UsersProvider({ children }) {
       isLoggedIn: false,
       orders: []
     };
-    const emailTaken = users.some(user => user.email === newUserObject.email);
+    const emailTaken = emailExists(newUserObject);
 
     if(emailTaken)
       return { success: false, message: 'User with that email already exists'};
 
-    const usernameTaken = users.some(user => user.username === newUserObject.username);
+    const usernameTaken = usernameExists(newUserObject);
 
     if (usernameTaken)
       return { success: false, message: 'User with that username already exists'};
@@ -74,9 +88,16 @@ export function UsersProvider({ children }) {
   };
 
   const updateUserData = (newUserData) => {
+    if (usernameExists(newUserData))
+      return { success: false, message: 'User with that username already exists' };
+
+    if (emailExists(newUserData))
+      return { success: false, message: 'User with that email already exists' };
+
     const updatedUser = {...loggedUser, ...newUserData};
     const newUsers = [...users.filter(user => user.id !== loggedUser.id), updatedUser];
     setUsersLocalStorage(newUsers);
+    return { success: true, message: 'Successfully updated user' };
   }
 
   const addOrderToUser = (order) => {
