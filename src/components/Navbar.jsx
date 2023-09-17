@@ -43,7 +43,7 @@ export function Navbar({ navVisible, setNavVisible }) {
       >
         {
           navVisible
-          ? <XMarkIcon className='text-red-300 h-10 w-10 font-bold' />
+          ? <XMarkIcon className='text-white h-10 w-10 font-bold' />
           : <Bars3Icon className='text-white h-10 w-10 font-bold' />
         }
       </button>
@@ -54,10 +54,13 @@ export function Navbar({ navVisible, setNavVisible }) {
               <NavLink
                 to={CustomRoutes.HOME}
               >
-                Cart!t
+                <figure className='flex justify-center items-center p-0 m-0'>
+                  <img className='w-12' src='/cart-it-96.png' alt='logo' />
+                  <figcaption>Cart-!t</figcaption>
+                </figure>
               </NavLink>
             </li>
-            <li>
+            <li className='lg:ml-6'>
               <NavLink
                 to={CustomRoutes.HOME}
                 className={({ isActive }) => isActive ? isActiveStyle : undefined}
