@@ -29,16 +29,16 @@ export function SignIn() {
         <div className='flex flex-col justify-around items-center gap-4 w-full'>
           <div className='flex flex-col items-start justify-stretch w-full'>
             <label>Username</label>
-            <input type='text' name='username' placeholder='john_doe32' value={username} onChange={(e) => setUsername(e.target.value)} className='p-2 rounded-lg bg-purple-200 w-full' />
+            <input type='text' name='username' placeholder='john_doe32' value={username} onChange={(e) => setUsername(e.target.value)} className='p-2 rounded-lg bg-slate-200 w-full' />
           </div>
 
           <div className='flex flex-col items-start justify-stretch w-full'>
             <label>Password</label>
-            <input type='password' name='password' placeholder='Do NOT provide real passwords' value={password} onChange={(e) => setPassword(e.target.value)} className='p-2 rounded-lg bg-purple-200 w-full' />
+            <input type='password' name='password' value={password} onChange={(e) => setPassword(e.target.value)} className='p-2 rounded-lg bg-slate-200 w-full' />
           </div>
         </div>
         <div className='w-full'>
-          <button className='w-full bg-purple-600 text-white py-2 px-4 rounded-lg'>Sign In</button>
+          <button className='w-full bg-primary-blue text-white py-2 px-4 rounded-lg'>Sign In</button>
         </div>
       </form>
     </div>
