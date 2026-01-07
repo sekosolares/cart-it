@@ -1,4 +1,4 @@
-import { NavLink } from 'react-router-dom';
+import { NavLink, useLocation } from 'react-router-dom';
 import { CustomRoutes } from '../../routes';
 import { useContext, useEffect, useState } from 'react';
 import { ProductsContext, STORE_API } from '../contexts/productContext';
@@ -10,6 +10,7 @@ const CATEGORIES = `${STORE_API}/products/categories`;
 export function Navbar({ navVisible, setNavVisible }) {
   const { loggedUser } = useContext(UsersContext);
   const { cartCounter, openCheckout, closeDetail } = useContext(ProductsContext);
+  const location = useLocation();
   const isActiveStyle = 'underline underline-offset-8';
   const signInUpStyle = loggedUser ? 'bg-red-500' : '';
   const [categories, setCategories] = useState([]);
@@ -49,47 +50,53 @@ export function Navbar({ navVisible, setNavVisible }) {
       </button>
       <nav className={`bg-white ${navVisible || windowWidth >= 1024 ? 'flex' : 'hidden'} items-center fixed z-20 py-5 px-8 font-normal max-sm:w-2/4 max-lg:text-lg max-lg:right-0 max-lg:overflow-y-auto cute-scroll max-lg:bottom-[100px] max-lg:max-h-[calc(100vh-180px)] max-lg:min-h-[calc(100vh-180px)] max-lg:rounded-lg max-lg:flex-col max-lg:justify-start max-lg:shadow-md lg:top-0 lg:w-full lg:justify-between lg:text-sm`}>
         <div className='flex flex-col justify-start items-center lg:flex-row'>
-          <ul className='flex flex-col justify-start items-center gap-6 max-md:w-full lg:flex-row'>
+          <ul className='flex flex-col justify-start items-center gap-2 max-md:w-full lg:flex-row'>
             <li className='font-semibold max-lg:text-2xl lg:text-lg'>
               <NavLink
                 to={CustomRoutes.HOME}
               >
                 <figure className='flex justify-center items-center p-0 m-0'>
                   <img className='w-12' src='/cart-it-96.png' alt='logo' />
-                  <figcaption>Cart-!t</figcaption>
+                  <figcaption className='text-xl text-primary-blue'>Cart-!t</figcaption>
                 </figure>
               </NavLink>
             </li>
-            <li className='lg:ml-6'>
-              <NavLink
-                to={CustomRoutes.HOME}
-                className={({ isActive }) => isActive ? isActiveStyle : undefined}
-              >
-                All
-              </NavLink>
-            </li>
-            <li className='bg-white text-black font-bold w-full ml-0 max-lg:self-start lg:px-2 lg:ml-4 '>
-              Categories:
-            </li>
-          </ul>
-          <ul className='flex flex-col justify-start gap-4 overflow-auto cute-scroll max-h-60 max-w-lg py-2 px-3 max-lg:items-start lg:items-center lg:flex-row'>
-            {
-              categories.map(category =>
-                <li
-                  key={category}
-                >
+            {![CustomRoutes.SIGN_IN, CustomRoutes.REGISTER].includes(location.pathname) && (
+              <>
+                <li className='lg:ml-6'>
                   <NavLink
-                    to={`/category/${category}`}
+                    to={CustomRoutes.HOME}
                     className={({ isActive }) => isActive ? isActiveStyle : undefined}
                   >
-                    {category}
+                    All
                   </NavLink>
-                </li>)
-            }
+                </li>
+                <li className='bg-white text-black font-bold ml-0 max-lg:self-start lg:px-2'>
+                  Categories:
+                </li>
+              </>
+            )}
           </ul>
+          {![CustomRoutes.SIGN_IN, CustomRoutes.REGISTER].includes(location.pathname) && (
+            <ul className='flex flex-col justify-start gap-2 overflow-auto cute-scroll max-h-60 max-w-[calc(100vw-550px)] py-2 px-3 max-lg:items-start lg:items-center lg:flex-row'>
+              {
+                categories.map(category =>
+                  <li
+                    key={category.slug}
+                  >
+                    <NavLink
+                      to={`/category/${category.slug}`}
+                      className={({ isActive }) => isActive ? isActiveStyle : undefined}
+                    >
+                      {category.name}
+                    </NavLink>
+                  </li>)
+              }
+            </ul>
+          )}
         </div>
 
-        <ul className='flex flex-col justify-center items-center max-lg:gap-4 max-lg:w-full max-lg:mt-8 lg:flex-row lg:gap-4'>
+        <ul className='flex flex-col justify-center items-center max-lg:gap-2 max-lg:w-full max-lg:mt-8 lg:flex-row lg:gap-2'>
           {
             loggedUser &&
             <>
@@ -129,7 +136,7 @@ export function Navbar({ navVisible, setNavVisible }) {
           <li>
             <NavLink
               to={loggedUser ? CustomRoutes.SIGN_OUT : CustomRoutes.SIGN_IN}
-              className={({ isActive }) => isActive ? `py-2 px-4 border-2 border-green-800 rounded-md ${signInUpStyle}` : `py-2 px-4 border border-black rounded-md ${signInUpStyle}`}
+              className={({ isActive }) => isActive ? `py-2 px-4 border-2 border-primary-blue rounded-md ${signInUpStyle}` : `py-2 px-4 border border-primary-blue rounded-md ${signInUpStyle}`}
             >
               {loggedUser ? 'Sign Out' : 'Sign In'}
             </NavLink>
@@ -139,7 +146,7 @@ export function Navbar({ navVisible, setNavVisible }) {
               <li>
                 <NavLink
                   to={CustomRoutes.REGISTER}
-                  className={({ isActive }) => isActive ? `bg-purple-800 text-white py-2 px-4 rounded-md border-2 border-black` : 'bg-purple-500 text-white py-2 px-4 rounded-md'}
+                  className={({ isActive }) => isActive ? `bg-primary-blue text-white py-2 px-4 rounded-md border-2 border-black` : 'bg-primary-blue text-white py-2 px-4 rounded-md'}
                 >
                   Register
                 </NavLink>
