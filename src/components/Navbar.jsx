@@ -11,7 +11,7 @@ export function Navbar({ navVisible, setNavVisible }) {
   const { loggedUser } = useContext(UsersContext);
   const { cartCounter, openCheckout, closeDetail } = useContext(ProductsContext);
   const location = useLocation();
-  const isActiveStyle = 'underline underline-offset-8';
+  const isActiveStyle = 'font-bold text-primary-blue border-b-2 border-primary-blue pb-1 px-1 rounded-md';
   const signInUpStyle = loggedUser ? 'bg-red-500' : '';
   const [categories, setCategories] = useState([]);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
@@ -39,7 +39,7 @@ export function Navbar({ navVisible, setNavVisible }) {
   return (
     <>
       <button
-        className='fixed bottom-5 right-5 w-16 h-16 rounded-full border-2 border-purple-900 bg-purple-600 flex justify-center items-center z-20 lg:hidden'
+        className='fixed bottom-5 right-5 w-16 h-16 rounded-full border-2 bg-primary-blue flex justify-center items-center z-20 lg:hidden'
         onClick={() => setNavVisible(!navVisible)}
       >
         {
@@ -48,9 +48,9 @@ export function Navbar({ navVisible, setNavVisible }) {
           : <Bars3Icon className='text-white h-10 w-10 font-bold' />
         }
       </button>
-      <nav className={`bg-white ${navVisible || windowWidth >= 1024 ? 'flex' : 'hidden'} items-center fixed z-20 py-5 px-8 font-normal max-sm:w-2/4 max-lg:text-lg max-lg:right-0 max-lg:overflow-y-auto cute-scroll max-lg:bottom-[100px] max-lg:max-h-[calc(100vh-180px)] max-lg:min-h-[calc(100vh-180px)] max-lg:rounded-lg max-lg:flex-col max-lg:justify-start max-lg:shadow-md lg:top-0 lg:w-full lg:justify-between lg:text-sm`}>
-        <div className='flex flex-col justify-start items-center lg:flex-row'>
-          <ul className='flex flex-col justify-start items-center gap-2 max-md:w-full lg:flex-row'>
+      <nav className={`bg-white ${navVisible || windowWidth >= 1024 ? 'flex' : 'hidden'} items-center justify-between flex-col max-w-[70vw] max-h-[80vh] fixed z-20 py-4 px-6 font-normal right-2 bottom-24 lg:max-h-16 lg:flex-row lg:right-0 lg:left-0 lg:top-0 lg:max-w-full`}>
+        <div className='bg-white flex flex-col justify-start items-center w-full lg:flex-row lg:w-auto'>
+          <ul className='flex flex-col justify-start items-center gap-2 max-md:w-full lg:flex-row pr-2'>
             <li className='font-semibold max-lg:text-2xl lg:text-lg'>
               <NavLink
                 to={CustomRoutes.HOME}
@@ -71,14 +71,14 @@ export function Navbar({ navVisible, setNavVisible }) {
                     All
                   </NavLink>
                 </li>
-                <li className='bg-white text-black font-bold ml-0 max-lg:self-start lg:px-2'>
+                <li className='font-semibold pr-1'>
                   Categories:
                 </li>
               </>
             )}
           </ul>
           {![CustomRoutes.SIGN_IN, CustomRoutes.REGISTER].includes(location.pathname) && (
-            <ul className='flex flex-col justify-start gap-2 overflow-auto cute-scroll max-h-60 max-w-[calc(100vw-550px)] py-2 px-3 max-lg:items-start lg:items-center lg:flex-row'>
+            <ul className={`flex justify-start max-h-40 flex-col items-center gap-4 py-2 max-md:w-full lg:flex-row overflow-auto cute-scroll ${loggedUser ? 'lg:max-w-xl' : 'lg:max-w-3xl'}`}>
               {
                 categories.map(category =>
                   <li
@@ -96,7 +96,7 @@ export function Navbar({ navVisible, setNavVisible }) {
           )}
         </div>
 
-        <ul className='flex flex-col justify-center items-center max-lg:gap-2 max-lg:w-full max-lg:mt-8 lg:flex-row lg:gap-2'>
+        <ul className='flex flex-col justify-center items-center gap-5 pt-3 lg:pt-0 lg:gap-2 lg:flex-row'>
           {
             loggedUser &&
             <>
